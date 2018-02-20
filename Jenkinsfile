@@ -9,7 +9,7 @@ pipeline {
         stage('CheckOut'){
             steps {
                 echo 'CheckOut code'
-                git url: 'https://github.com/areshdeep/TestRepository/tree/master/SampleJenkins'
+                git url: 'https://github.com/areshdeep/TestRepository'
             }
         }
         stage('Build') {
