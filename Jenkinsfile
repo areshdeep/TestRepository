@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build code'
-                build 'JenkinsMySample'
+                build 'SampleJenkins'
             }
         }
 	    stage('Testing') {
