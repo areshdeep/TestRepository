@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Build code'
+                echo 'Build code 1'
 				bat "D:\\Work\\PPL\\Own\\Jenkinsetup\\nuget.exe restore ${WORKSPACE}\\SampleJenkins\\SampleJenkins.sln"
 				script {
                   def msbuild = tool name: 'MSBuild.exe', type: 'hudson.plugins.msbuild.MsBuildInstallation'
