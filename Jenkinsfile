@@ -15,6 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build code'
+				bat "D:\\Work\\PPL\\Own\\Jenkinsetup\\nuget.exe restore ${WORKSPACE}\\SampleJenkins\\SampleJenkins.sln"
                 build 'SampleJenkins'
             }
         }
