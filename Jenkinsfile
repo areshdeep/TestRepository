@@ -17,7 +17,7 @@ pipeline {
                 echo 'Build code 1'
 				bat "\"D:\\Work\\PPL\\Own\\Jenkinsetup\\nuget.exe\" restore \"${WORKSPACE}\\SampleJenkins\\SampleApp.sln\""
 				script {
-                  def msbuild = tool name: 'MSBuild.exe', type: 'hudson.plugins.msbuild.MsBuildInstallation'
+                  def msbuild = tool name: 'MSBuild.exe'
                   bat "\"C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\${msbuild}\" ${WORKSPACE}\\SampleJenkinsPipeline\\SampleJenkins\\SampleApp.sln"
                 } 
             }
