@@ -1,12 +1,15 @@
 @Library('TestGrrovy')
-node {
-   def mvnHome
+pipeline {
+    agent { 
+        label 'jenkinsCIWindows'
+    }
    stage('Preparation') { 
    echo 'Preparation...'
       git 'https://github.com/jglick/simple-maven-project-with-tests.git'
    }
    stage('CheckOut') {
    echo 'CheckOut...'
+   aem_Deploy("abc")
         git url: 'https://github.com/areshdeep/TestRepository'
    }
    stage('Build') {
