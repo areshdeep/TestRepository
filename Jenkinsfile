@@ -17,7 +17,8 @@ pipeline {
                 echo 'Build code 1'
 				bat "\"D:\\Work\\PPL\\Own\\Jenkinsetup\\nuget.exe\" restore \"${WORKSPACE}\\SampleJenkins\\SampleApp.sln\""
 				script {
-                  bat "\"${MsBuild}\" ${WORKSPACE}\\SampleJenkinsPipeline\\SampleJenkins\\SampleApp.sln"
+                  def msbuild = tool name: 'MSBuild.exe'
+                  bat "\"${msbuild}\" \"${WORKSPACE}\\SampleJenkinsPipeline\\SampleJenkins\\SampleApp.sln\""
                 } 
             }
         }
@@ -26,7 +27,7 @@ pipeline {
 				echo 'Testing..'
 				script {
 					def msbuild = tool name: 'MSBuild.exe', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-					bat "\"${msbuild}\" ${WORKSPACE}\\mstest.proj"
+					bat "\"${msbuild}\" ${WORKSPACE}\\mstest.proj "
                 }
 	        step([$class: 'MSTestPublisher', testResultsFile:"**/*.trx", failOnError: true, keepLongStdio: true])
 			 publishHTML target: [
