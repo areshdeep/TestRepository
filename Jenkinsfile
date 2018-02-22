@@ -48,14 +48,7 @@ pipeline {
 	   
 	    stage('SonarQube analysis') {
 			steps {
-				echo 'Sonar Qube analysis..'
-				def msbuild = tool name: 'MSBuild.exe', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-				
-				withSonarQubeEnv('DOJO-SONAR') {
-				  bat "\"${msbuild}\" ${WORKSPACE}\\SampleJenkinsPipeline\\SampleJenkins\\SampleApp.sln /t:clean /t:build /p:Configuration=Release"
-				  bat "\"${msbuild}\" ${WORKSPACE}\\SampleJenkins\\SampleAppTest\\SampleAppTest.proj"
-				}
-					
+				echo 'Sonar Qube analysis..'					
 			}
 		}
 	}
