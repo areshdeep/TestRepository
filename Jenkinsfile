@@ -37,6 +37,7 @@ pipeline {
             reportDir: 'TestResults',
             reportFiles: 'summary.htm',
             reportName: 'CoverageReport'
+			]
 			}
 		}
 		stage('Deploy') {
