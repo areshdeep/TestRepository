@@ -1,8 +1,6 @@
 @Library('TestGrrovy')
 pipeline {
-    agent { 
-        label 'jenkinsCIWindows'
-    }
+    agent any
    stage('Preparation') { 
    echo 'Preparation...'
       git 'https://github.com/jglick/simple-maven-project-with-tests.git'
