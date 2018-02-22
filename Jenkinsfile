@@ -17,7 +17,7 @@ pipeline {
                 echo 'Build code 1'
 				bat "\"D:\\Work\\PPL\\Own\\Jenkinsetup\\nuget.exe\" restore \"${WORKSPACE}\\SampleJenkins\\SampleApp.sln\""
 				script {
-                  bat "MsBuild\"${WORKSPACE}\\SampleJenkinsPipeline\\SampleJenkins\\SampleApp.sln\""
+                  bat "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe \"${WORKSPACE}\\SampleJenkinsPipeline\\SampleJenkins\\SampleApp.sln\""
                 } 
             }
         }
