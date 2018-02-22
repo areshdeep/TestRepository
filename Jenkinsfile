@@ -1,4 +1,4 @@
-Library <TestGrrovy>
+@Library('TestGrrovy')
 node {
    def mvnHome
    stage('Preparation') { 
