@@ -29,15 +29,6 @@ pipeline {
 					def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
 					bat "\"${msbuild}\\msbuild.exe\" ${WORKSPACE}\\SampleJenkins\\SampleAppTest\\SampleAppTest.csproj"
                 }
-	        step([$class: 'MSTestPublisher', testResultsFile:"**/*.trx", failOnError: true, keepLongStdio: true])
-			 publishHTML target: [
-            allowMissing: false,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: 'TestResults',
-            reportFiles: 'summary.htm',
-            reportName: 'CoverageReport'
-			]
 			}
 		}
 		stage('Deploy') {
