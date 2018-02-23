@@ -26,8 +26,8 @@ pipeline {
 			steps {
 				echo 'Testing..'
 				script {
-					def msbuild = tool name: 'MSBuild.exe', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-					bat "\"${msbuild}\" ${WORKSPACE}\\mstest.proj "
+					def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
+					bat "\"${msbuild}\\msbuild.exe\" ${WORKSPACE}\\SampleJenkins\\SampleAppTest\\SampleAppTest.csproj"
                 }
 	        step([$class: 'MSTestPublisher', testResultsFile:"**/*.trx", failOnError: true, keepLongStdio: true])
 			 publishHTML target: [
