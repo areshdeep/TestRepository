@@ -1,10 +1,9 @@
 #!/usr/bin/groovy
-@Library('testlib')_
+@Library('PsObaiLib')_
  
 try {
     node {
         stage '\u2777 Clean Up'
-        stage '\u2776 Checkout'
         
 		stage ('\u2777 Checkout') {
 			CheckOut('https://github.com/areshdeep/TestRepository')
