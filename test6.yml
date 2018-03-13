@@ -1,10 +1,18 @@
 ---
 execution:
-- concurrency: 10 # number of user 
-  hold-for: 10s # time frame  for sending request
+- concurrency: 1 # number of user 
+  hold-for: 1s # time frame  for sending request
   ramp-up: 1s # ramp up time to fire subsequent request
   iterations: 1
   scenario: 
     requests:
      - url: http://blazedemo.com/
      
+reporting:
+- module: final-stats
+  summary: true  # overall samples count and percent of failures
+  percentiles: true  # display average times and percentiles
+  failed-labels: false  # provides list of sample labels with failures
+  test-duration: true  # provides test duration
+  dump-xml: D:\Work\PPL\Puneet\dump1.xml
+  dump-csv: D:\Work\PPL\Puneet\dump1.csv 
