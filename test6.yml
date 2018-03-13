@@ -14,5 +14,5 @@ reporting:
   percentiles: true  # display average times and percentiles
   failed-labels: false  # provides list of sample labels with failures
   test-duration: true  # provides test duration
-  dump-xml: D:\Work\PPL\Puneet\dump1.xml
-  dump-csv: D:\Work\PPL\Puneet\dump1.csv 
+  dump-xml: C:\JenkinsDoNotTouch\Workspace\dump1.xml
+  dump-csv: C:\JenkinsDoNotTouch\Workspace\dump1.csv 
