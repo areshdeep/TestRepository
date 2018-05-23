@@ -16,4 +16,4 @@ reporting:
   test-duration: true  # provides test duration
   dump-xml: C:\JenkinsDoNotTouch\Workspace\dump1.xml
   dump-csv: C:\JenkinsDoNotTouch\Workspace\dump1.csv 
-  ##
+  
