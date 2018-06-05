@@ -6,14 +6,9 @@ try {
         stage '\u2777 Clean Up'
         
 		stage ('\u2777 Checkout') {
-			CheckOut('https://github.com/areshdeep/TestRepository')
+			CheckOut(["https://github.com/areshdeep/TestRepository"])
 		}
 		stage ('\u2777 Build') {
-			bat "\"D:\\Work\\PPL\\Own\\Jenkinsetup\\nuget.exe\" restore \"${WORKSPACE}\\SampleJenkins\\SampleApp.sln\""
-			script {
-              def msbuild = tool name: 'MsBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-              bat "\"${msbuild}\\msbuild.exe\" ${WORKSPACE}\\SampleJenkins\\SampleApp.sln"
-            } 
 		}
         
         stage '\u2777 Tesing'
