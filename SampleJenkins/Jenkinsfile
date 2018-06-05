@@ -6,7 +6,7 @@ try {
         stage '\u2777 Clean Up'
         
 		stage ('\u2777 Checkout') {
-			CheckOut(["https://github.com/areshdeep/TestRepository"])
+			checkoutUrl(["https://github.com/areshdeep/TestRepository"])
 		}
 		stage ('\u2777 Build') {
 		}
