@@ -4,9 +4,20 @@
 try {
     node {
         stage '\u2777 Clean Up'
+		{
+			properties([parameters([booleanParam(defaultValue: false, description: '', name: 'DeploymentParameterTest')])])
+            if (DeploymentParameterTest)
+            {
+                echo "Test success"
+            }
+            else
+            {
+                echo "Test failure"   
+            }
+		}
         
 		stage ('\u2777 Checkout') {
-			checkoutUrl(["https://github.com/areshdeep/TestRepository"])
+			// checkoutUrl(["https://github.com/areshdeep/TestRepository"])
 		}
 		stage ('\u2777 Build') {
 		}
