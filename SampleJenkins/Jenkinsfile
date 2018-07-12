@@ -3,9 +3,9 @@
  
 try {
     node {
+		properties([parameters([booleanParam(defaultValue: false, description: '', name: 'DeploymentParameterTest')])])
         stage '\u2777 Clean Up'
 		{
-			properties([parameters([booleanParam(defaultValue: false, description: '', name: 'DeploymentParameterTest')])])
             if (DeploymentParameterTest)
             {
                 echo "Test success"
