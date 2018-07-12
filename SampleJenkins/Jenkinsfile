@@ -4,9 +4,7 @@
 try {
     node {
 		properties([parameters([booleanParam(defaultValue: false, description: '', name: 'DeploymentParameterTest')])])
-        stage '\u2777 Clean Up'
-		{
-            if (DeploymentParameterTest)
+		if (DeploymentParameterTest)
             {
                 echo "Test success"
             }
@@ -14,6 +12,9 @@ try {
             {
                 echo "Test failure"   
             }
+        stage '\u2777 Clean Up'
+		{
+            
 		}
         
 		stage ('\u2777 Checkout') {
