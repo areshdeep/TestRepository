@@ -4,7 +4,7 @@
 try {
     node {
 		properties([parameters([booleanParam(defaultValue: false, description: '', name: 'DeploymentParameterTest')])])
-		if (DeploymentParameterTest)
+		if (DeploymentParameterTest == "true")
             {
                 echo "Test success"
             }
