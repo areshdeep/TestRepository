@@ -17,7 +17,7 @@ try {
 		
 		stage ('\u2777 Checkout')
 		{
-			checkoutUrl(["https://github.com/areshdeep/TestRepository"])
+			gitCheckoutAll{}
 		}
         stage ('\u2777 Sonar Test')
 		{
