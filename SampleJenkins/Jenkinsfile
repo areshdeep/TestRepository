@@ -22,9 +22,30 @@ try {
         stage ('\u2777 Sonar Test')
 		{
 			withSonarQubeEnv('DOJO-SONAR') {
-			bat "\"${sonarToolPath}\\SonarQube.Scanner.MSBuild.exe\" begin /k:$serviceJobName /n:$JOB_NAME /v:$BUILD_NUMBER /d:sonar.cs.vstest.reportsPaths=\"TestResults\\*.trx\" /d:sonar.cs.opencover.reportsPaths=\"${WORKSPACE}\\coverage-log.xml\""
-			bat "\"${msbuildPath}\\msbuild.exe\" \"${WORKSPACE}\\TestRepository\\SampleJenkins\\SampleApp.sln\" /t:build /p:Configuration="Debug" /p:DeployOnBuild=true /p:WebPublishMethod=Package  /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true"
-			SonarQuality()
+				bat "\"${sonarToolPath}\\SonarQube.Scanner.MSBuild.exe\" begin /k:$serviceJobName /n:$JOB_NAME /v:$BUILD_NUMBER /d:sonar.cs.vstest.reportsPaths=\"TestResults\\*.trx\" /d:sonar.cs.opencover.reportsPaths=\"${WORKSPACE}\\coverage-log.xml\""
+				bat "\"${msbuildPath}\\msbuild.exe\" \"${WORKSPACE}\\TestRepository\\SampleJenkins\\SampleApp.sln\" /t:build /p:Configuration="Debug" /p:DeployOnBuild=true /p:WebPublishMethod=Package  /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true"
+				
+				
+				
+				def creds = 'git-credentials'
+				def sonarfile = '.sonarqube/out/.sonar/report-task.txt'
+				def sprops = readProperties  file: sonarfile
+				def sonarServerUrl=sprops['serverUrl']
+				def ceTaskUrl= sprops['ceTaskUrl']
+				def ceTask
+				timeout(time: 1, unit: 'MINUTES') {
+					waitUntil {
+						def response = httpRequest url: ceTaskUrl , authentication: creds
+						ceTask = readJSON text: response.content
+						echo ceTask.toString()
+						return "SUCCESS".equals(ceTask["task"]["status"])
+					}
+				}
+				def qgresponse = httpRequest url : sonarServerUrl + "/api/qualitygates/project_status?analysisId=" + ceTask["task"]["analysisId"], authentication: creds
+				def qualitygate =  readJSON text: qgresponse.content
+				if ("ERROR".equals(qualitygate["projectStatus"]["status"])) {
+					error  "Quality Gate failure"
+				}
 			}
 		}
         
@@ -40,25 +61,7 @@ try {
         
         stage '\u2777 SonarQube Analysis'
 		
-		def SonarQuality(sonarfile = '.sonarqube/out/.sonar/report-task.txt', creds = 'git-credentials') {
-			def sprops = readProperties  file: sonarfile
-			def sonarServerUrl=sprops['serverUrl']
-			def ceTaskUrl= sprops['ceTaskUrl']
-			def ceTask
-			timeout(time: 1, unit: 'MINUTES') {
-				waitUntil {
-					def response = httpRequest url: ceTaskUrl , authentication: creds
-					ceTask = readJSON text: response.content
-					echo ceTask.toString()
-					return "SUCCESS".equals(ceTask["task"]["status"])
-				}
-			}
-			def qgresponse = httpRequest url : sonarServerUrl + "/api/qualitygates/project_status?analysisId=" + ceTask["task"]["analysisId"], authentication: creds
-			def qualitygate =  readJSON text: qgresponse.content
-			if ("ERROR".equals(qualitygate["projectStatus"]["status"])) {
-				error  "Quality Gate failure"
-			}
-		}
+			
     }
 } 
 catch (exc) {
